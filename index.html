@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10131f" />
+  <title>TaskFlow — Make room for what matters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✦</span><span>taskflow</span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="all"><span>▦</span> Overview</button>
+        <button class="nav-link" data-view="today"><span>◷</span> Today</button>
+        <button class="nav-link" data-view="upcoming"><span>▤</span> Upcoming</button>
+        <button class="nav-link" data-view="completed"><span>✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="focus-card">
+          <div class="focus-icon">✧</div>
+          <strong>Stay in flow.</strong>
+          <p>Small steps. Consistent progress. Big results.</p>
+          <div class="focus-line"><span></span></div>
+          <small id="focus-count">0 tasks completed</small>
+        </div>
+        <div class="profile">
+          <div class="avatar">JD</div>
+          <div><strong>John Doe</strong><small>Personal workspace</small></div>
+          <span class="more">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="menu-toggle" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <b id="breadcrumb-title">Overview</b></div>
+        <div class="top-actions">
+          <div class="date-chip" id="date-chip"></div>
+          <button class="icon-button" id="theme-toggle" title="Toggle theme">☼</button>
+          <div class="mini-avatar">TS</div>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <p class="eyebrow" id="greeting">YOUR SPACE, YOUR PACE</p>
+          <h1 id="page-title">Good evening, John<span>.</span></h1>
+          <p class="subheading">Make today count. One task at a time.</p>
+        </div>
+        <button class="primary-button" id="add-open"><span>＋</span> New task</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▦</span></div><strong id="total-stat">0</strong><small><i class="dot purple-dot"></i> Across your workspace</small></article>
+        <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon orange">◷</span></div><strong id="active-stat">0</strong><small><i class="dot orange-dot"></i> Keep the momentum</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><strong id="done-stat">0</strong><small><i class="dot green-dot"></i> Progress looks good</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Completion rate</span><span class="stat-icon blue">↗</span></div><strong id="rate-stat">0%</strong><small><i class="dot blue-dot"></i> Your consistency score</small></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="tasks-panel panel">
+          <div class="panel-heading">
+            <div><h2 id="list-heading">Your tasks</h2><p id="list-caption">Everything you need to move forward.</p></div>
+            <div class="filters">
+              <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search tasks..." /></label>
+              <select id="sort-select" aria-label="Sort tasks"><option value="date">Due date</option><option value="priority">Priority</option><option value="newest">Newest</option></select>
+            </div>
+          </div>
+          <div class="task-list" id="task-list"></div>
+          <div class="empty-state" id="empty-state" hidden><div>✦</div><strong>Nothing on your list</strong><p>Add a task and turn intention into action.</p><button class="text-button" id="empty-add">Create your first task →</button></div>
+          <div class="list-footer"><span id="visible-count">0 tasks</span><button class="text-button" id="clear-completed">Clear completed</button></div>
+        </div>
+
+        <aside class="right-column">
+          <div class="panel progress-panel">
+            <div class="panel-heading"><div><h2>Your progress</h2><p>A little progress adds up.</p></div><span class="sparkle">✧</span></div>
+            <div class="progress-ring-wrap">
+              <svg class="progress-ring" viewBox="0 0 140 140"><circle class="ring-bg" cx="70" cy="70" r="58"></circle><circle class="ring-value" id="ring-value" cx="70" cy="70" r="58"></circle></svg>
+              <div class="ring-label"><strong id="ring-percent">0%</strong><span>completed</span></div>
+            </div>
+            <div class="progress-legend"><span><i class="dot green-dot"></i> Completed</span><b id="legend-done">0</b></div>
+            <div class="progress-legend"><span><i class="dot muted-dot"></i> Remaining</span><b id="legend-left">0</b></div>
+          </div>
+          <div class="quote-card"><div class="quote-mark">“</div><p>Great things are done by a series of small things brought together.</p><small>— Vincent van Gogh</small><div class="quote-decoration">✳</div></div>
+          <div class="tip-card"><span class="tip-icon">✧</span><div><strong>Quick tip</strong><p>Break big projects into smaller tasks. Your future self will thank you.</p></div></div>
+        </aside>
+      </section>
+      <footer>Designed with clarity <span>✦</span> TaskFlow · Personal productivity workspace</footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop">
+    <form class="task-modal" id="task-form">
+      <div class="modal-head"><div><p class="eyebrow">MAKE IT HAPPEN</p><h2 id="modal-title">Create a task</h2></div><button type="button" class="close-button" id="modal-close">×</button></div>
+      <label>Task title<input id="task-title" maxlength="90" placeholder="e.g. Finish portfolio homepage" required /></label>
+      <label>Description <span class="optional">(optional)</span><textarea id="task-description" rows="3" maxlength="220" placeholder="Add a little context..."></textarea></label>
+      <div class="form-row"><label>Due date<input id="task-date" type="date" /></label><label>Priority<select id="task-priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancel-task">Cancel</button><button class="primary-button" type="submit">Save task <span>→</span></button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
